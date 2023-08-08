@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 interface UserPayload {
-    id: string;
+    _id: string;
     firstName: string;
     lastName: string;
     email: string;
