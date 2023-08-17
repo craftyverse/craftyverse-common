@@ -18,7 +18,7 @@
     "publish": "npm run git:add && npm run git:commit && npm run npm:version:patch && npm run npm:build && npm run npm:publish"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "@craftyverse-au:registry": "https://npm.pkg.github.com"
   },
   "keywords": [],
   "author": "",
