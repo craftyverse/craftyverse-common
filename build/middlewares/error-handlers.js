@@ -6,7 +6,7 @@ const errorHandler = (err, req, res, next) => {
     if (err instanceof custom_error_1.CustomError) {
         return res.status(err.statusCode).send({ errors: err.serialiseErrors() });
     }
-    console.log(err);
+    console.log("Error:", err);
     res.status(400).send({
         errors: [{ message: "Something went wrong" }],
     });

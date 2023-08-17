@@ -10,6 +10,7 @@
   "scripts": {
     "clean": "del ./build/*",
     "build": "npm run clean && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "git:add": "git add .",
     "git:commit": "git commit -m \"Updates\"",
     "npm:version:patch": "npm version patch",
