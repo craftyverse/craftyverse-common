@@ -9,13 +9,7 @@
   "scripts": {
     "clean": "del ./build/*",
     "build": "npm run clean && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "git:add": "git add .",
-    "git:commit": "git commit -m \"Updates\"",
-    "npm:version:patch": "npm version patch",
-    "npm:build": "npm run build",
-    "npm:publish": "npm publish",
-    "publish": "npm run git:add && npm run git:commit && npm run npm:version:patch && npm run npm:build && npm run npm:publish"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "publishConfig": {
     "@craftyverse-au:registry": "https://registry.npmjs.org/",
