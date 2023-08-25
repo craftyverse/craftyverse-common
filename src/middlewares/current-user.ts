@@ -22,7 +22,7 @@ export const currentUser = (
   res: Response,
   next: NextFunction
 ) => {
-  if (!req.session || !req.session?.jwt) {
+  if (!req.session || !req.session.jwt) {
     return next();
   }
 
