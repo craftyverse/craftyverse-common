@@ -8,7 +8,6 @@ interface UserPayload {
   email: string;
   iat: number;
 }
-
 declare global {
   namespace Express {
     interface Request {
@@ -22,18 +21,19 @@ export const currentUser = (
   res: Response,
   next: NextFunction
 ) => {
-  if (!req.session || !req.session.jwt) {
+  if (!req.session?.jwt) {
     return next();
   }
 
   try {
     const payload = jwt.verify(
       req.session.jwt,
-      process.env.JWT_KEY as string
+      process.env.JWT_KEY!
     ) as UserPayload;
 
+    console.log(req.session);
     req.currentUser = payload;
-  } catch (error) {}
+  } catch (err) {}
 
   next();
 };
