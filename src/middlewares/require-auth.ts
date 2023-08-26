@@ -1,11 +1,12 @@
-import { Request, Response, NextFunction } from 'express';
-import { NotAuthorisedError } from '../errors/not-authorised-error';
+import { Request, Response, NextFunction } from "express";
+import { NotAuthorisedError } from "../errors/not-authorised-error";
 
 export const requireAuth = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  console.log(req.currentUser);
   if (!req.currentUser) {
     throw new NotAuthorisedError();
   }
