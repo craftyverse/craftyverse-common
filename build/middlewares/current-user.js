@@ -13,6 +13,7 @@ const currentUser = (req, res, next) => {
     try {
         const payload = jsonwebtoken_1.default.verify(req.session.jwt, process.env.JWT_KEY);
         req.currentUser = payload;
+        console.log("This is the currentuser: ", req.currentUser);
     }
     catch (err) { }
     next();
