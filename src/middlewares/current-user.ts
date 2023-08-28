@@ -3,10 +3,9 @@ import jwt from "jsonwebtoken";
 
 interface UserPayload {
   userId: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  iat: number;
+  userFirstName: string;
+  userLastName: string;
+  userEmail: string;
 }
 declare global {
   namespace Express {
@@ -30,9 +29,8 @@ export const currentUser = (
       req.session.jwt,
       process.env.JWT_KEY!
     ) as UserPayload;
-    console.log("This is the payload: ", payload);
+    console.log("This is the current user: ", payload);
     req.currentUser = payload;
-    console.log("This is the currentuser: ", req.currentUser);
   } catch (err) {}
 
   next();
