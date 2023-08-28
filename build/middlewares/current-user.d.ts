@@ -1,10 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 interface UserPayload {
     userId: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    iat: number;
+    userFirstName: string;
+    userLastName: string;
+    userEmail: string;
 }
 declare global {
     namespace Express {
