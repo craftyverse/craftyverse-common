@@ -12,3 +12,4 @@ export * from "./events/base-publisher";
 export * from "./events/subjects";
 export * from "./events/event-definition/craftyverse-location-service-events/location-created-event";
 export * from "./events/event-definition/craftyverse-location-service-events/location-patched-event";
+export * from "./events/event-definition/craftyverse-location-service-events/location-deleted-event";
