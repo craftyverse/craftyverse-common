@@ -1,23 +1,5 @@
 import { Subjects } from "../../subjects";
 
-enum locationRegionEnum {
-  Australia = "AUS",
-  England = "ENG",
-  America = "USA",
-  China = "CHN",
-}
-
-enum locationSIUnitEnum {
-  Pound = "LB",
-  Kilo = "KG",
-}
-
-enum locationCurrencyEnum {
-  AustralianDollar = "AUD",
-  USDollar = "USD",
-  ChineseDollar = "RMB",
-}
-
 export interface LocationPatchedEvent {
   subject: Subjects.LocationPatched;
   data: {
@@ -26,10 +8,10 @@ export interface LocationPatchedEvent {
     locationName: string;
     locationEmail: string;
     locationIndustry: string;
-    locationRegion: locationRegionEnum;
-    locationCurrency: locationCurrencyEnum;
+    locationRegion: string;
+    locationCurrency: string;
     locationTimeZone: string;
-    locationSIUnit: locationSIUnitEnum;
+    locationSIUnit: string;
     locationLegalBusinessName: string;
     locationLegalAddressLine1: string;
     locationLegalAddressLine2: string;
