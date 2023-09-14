@@ -15,6 +15,11 @@ export * from "./middlewares/require-auth";
 export * from "./events/base-listener";
 export * from "./events/base-publisher";
 export * from "./events/subjects";
+
+// Location service events
 export * from "./events/event-definition/craftyverse-location-service-events/location-created-event";
 export * from "./events/event-definition/craftyverse-location-service-events/location-patched-event";
 export * from "./events/event-definition/craftyverse-location-service-events/location-deleted-event";
+
+// Image service events
+export * from "./events/event-definition/craftyverse-image-service-events/image-uploaded-event";
