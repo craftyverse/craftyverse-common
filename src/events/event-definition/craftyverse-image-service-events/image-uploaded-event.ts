@@ -1,5 +1,5 @@
 import { Subjects } from "../../subjects";
-export interface imageUploadedEvent {
+export interface ImageUploadedEvent {
   subject: Subjects.ImageUploaded;
   data: {};
 }
