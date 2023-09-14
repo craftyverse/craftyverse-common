@@ -11,4 +11,8 @@ var Subjects;
     Subjects["LocationRetrievedById"] = "location:retrieved:id";
     Subjects["LocationRetrievedByEmail"] = "location:retrieved:email";
     Subjects["LocationDeleted"] = "location:deleted";
+    /*
+     * This will list all of the possible types of subjects (events) that will be emitted from the image service
+     */
+    Subjects["ImageUploaded"] = "image:uploaded";
 })(Subjects || (exports.Subjects = Subjects = {}));

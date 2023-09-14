@@ -3,5 +3,6 @@ export declare enum Subjects {
     LocationPatched = "location:patched",
     LocationRetrievedById = "location:retrieved:id",
     LocationRetrievedByEmail = "location:retrieved:email",
-    LocationDeleted = "location:deleted"
+    LocationDeleted = "location:deleted",
+    ImageUploaded = "image:uploaded"
 }

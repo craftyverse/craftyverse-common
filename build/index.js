@@ -29,6 +29,9 @@ __exportStar(require("./middlewares/require-auth"), exports);
 __exportStar(require("./events/base-listener"), exports);
 __exportStar(require("./events/base-publisher"), exports);
 __exportStar(require("./events/subjects"), exports);
+// Location service events
 __exportStar(require("./events/event-definition/craftyverse-location-service-events/location-created-event"), exports);
 __exportStar(require("./events/event-definition/craftyverse-location-service-events/location-patched-event"), exports);
 __exportStar(require("./events/event-definition/craftyverse-location-service-events/location-deleted-event"), exports);
+// Image service events
+__exportStar(require("./events/event-definition/craftyverse-image-service-events/image-uploaded-event"), exports);

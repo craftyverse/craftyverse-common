@@ -13,3 +13,4 @@ export * from "./events/subjects";
 export * from "./events/event-definition/craftyverse-location-service-events/location-created-event";
 export * from "./events/event-definition/craftyverse-location-service-events/location-patched-event";
 export * from "./events/event-definition/craftyverse-location-service-events/location-deleted-event";
+export * from "./events/event-definition/craftyverse-image-service-events/image-uploaded-event";
