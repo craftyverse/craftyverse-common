@@ -35,3 +35,5 @@ __exportStar(require("./events/event-definition/craftyverse-location-service-eve
 __exportStar(require("./events/event-definition/craftyverse-location-service-events/location-deleted-event"), exports);
 // Image service events
 __exportStar(require("./events/event-definition/craftyverse-image-service-events/image-uploaded-event"), exports);
+// Product statuses
+__exportStar(require("./events/types/order-status"), exports);
