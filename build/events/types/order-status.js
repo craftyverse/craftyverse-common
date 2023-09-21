@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderStatus = void 0;
-var OrderStatus;
-(function (OrderStatus) {
+exports.ProductStatus = void 0;
+var ProductStatus;
+(function (ProductStatus) {
     // These product status may change or additional status may be added
-    OrderStatus["Created"] = "created";
-    OrderStatus["Cancelled"] = "cancelled";
-    OrderStatus["Incomplete"] = "incomplete";
-    OrderStatus["Complete"] = "complete";
-})(OrderStatus || (exports.OrderStatus = OrderStatus = {}));
+    ProductStatus["Created"] = "created";
+    ProductStatus["Cancelled"] = "cancelled";
+    ProductStatus["Incomplete"] = "incomplete";
+    ProductStatus["Complete"] = "complete";
+})(ProductStatus || (exports.ProductStatus = ProductStatus = {}));

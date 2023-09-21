@@ -1,4 +1,4 @@
-export declare enum OrderStatus {
+export declare enum ProductStatus {
     Created = "created",
     Cancelled = "cancelled",
     Incomplete = "incomplete",
