@@ -25,4 +25,4 @@ export * from "./events/event-definition/craftyverse-location-service-events/loc
 export * from "./events/event-definition/craftyverse-image-service-events/image-uploaded-event";
 
 // Product statuses
-export * from "./events/types/order-status";
+export * from "./events/types/product-item-status";
