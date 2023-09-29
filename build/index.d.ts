@@ -7,3 +7,4 @@ export * from "./errors/request-validation-error";
 export * from "./middlewares/current-user";
 export * from "./middlewares/error-handlers";
 export * from "./middlewares/require-auth";
+export * from "../src/services/sns-service";

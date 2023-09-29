@@ -25,3 +25,5 @@ __exportStar(require("./errors/request-validation-error"), exports);
 __exportStar(require("./middlewares/current-user"), exports);
 __exportStar(require("./middlewares/error-handlers"), exports);
 __exportStar(require("./middlewares/require-auth"), exports);
+// SNS clinet export
+__exportStar(require("../src/services/sns-service"), exports);
