@@ -9,7 +9,7 @@ import {
   PublishCommandOutput,
 } from "@aws-sdk/client-sns";
 
-const awsSnsClient = (() => {
+export const awsSnsClient = (() => {
   let snsClient: SNSClient;
 
   /**
@@ -115,5 +115,3 @@ const awsSnsClient = (() => {
     publishMessage,
   };
 })();
-
-export default awsSnsClient;
