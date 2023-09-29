@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.awsSnsClient = void 0;
-const aws_config_1 = require("../config/aws.config");
 const client_sns_1 = require("@aws-sdk/client-sns");
 exports.awsSnsClient = (() => {
     let snsClient;
@@ -18,22 +17,23 @@ exports.awsSnsClient = (() => {
      * This function will generate a default AWS SNS client
      * @returns {SNSClient}
      */
-    const createSnsClient = () => {
+    const createSnsClient = (config) => {
         if (!snsClient) {
-            snsClient = new client_sns_1.SNSClient(aws_config_1.awsConfig);
+            snsClient = new client_sns_1.SNSClient(config);
         }
         return snsClient;
     };
     /**
      * This will create a sns topic
+     * @param config - The AWS credentials
      * @param topicName - Name of the desired topic name
      * @returns {CreateTopicCommandOutput}
      */
-    const createSnsTopic = (topicName) => __awaiter(void 0, void 0, void 0, function* () {
-        const snsClient = createSnsClient();
+    const createSnsTopic = (config, topicName) => __awaiter(void 0, void 0, void 0, function* () {
+        const snsClient = createSnsClient(config);
         const topicNameParams = { Name: topicName };
         const extractedTopicNames = [];
-        const topicList = yield listAllSnsTopics();
+        const topicList = yield listAllSnsTopics(config);
         if (topicList && topicList.Topics) {
             topicList.Topics.forEach((topic) => {
                 const topicArn = topic.TopicArn;
@@ -55,8 +55,8 @@ exports.awsSnsClient = (() => {
      * This will list all of tje global sns topics
      * @returns {Promise<ListTopicsCommand | undefined>}
      */
-    const listAllSnsTopics = () => __awaiter(void 0, void 0, void 0, function* () {
-        const snsClient = createSnsClient();
+    const listAllSnsTopics = (config) => __awaiter(void 0, void 0, void 0, function* () {
+        const snsClient = createSnsClient(config);
         const listTopicsParams = {};
         try {
             const listSnsTopicCommand = new client_sns_1.ListTopicsCommand(listTopicsParams);
@@ -72,8 +72,8 @@ exports.awsSnsClient = (() => {
      * @param message - Message that is going to be published.
      * @param topicArn - The topic that the message is going to publish to.
      */
-    const publishMessage = (message, topicArn) => __awaiter(void 0, void 0, void 0, function* () {
-        const snsClient = createSnsClient();
+    const publishMessage = (config, message, topicArn) => __awaiter(void 0, void 0, void 0, function* () {
+        const snsClient = createSnsClient(config);
         const publishMessageParams = {
             Message: message,
             topicArn,
