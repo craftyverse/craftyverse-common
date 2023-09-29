@@ -26,4 +26,4 @@ __exportStar(require("./middlewares/current-user"), exports);
 __exportStar(require("./middlewares/error-handlers"), exports);
 __exportStar(require("./middlewares/require-auth"), exports);
 // SNS clinet export
-__exportStar(require("../src/services/sns-service"), exports);
+__exportStar(require("./services/sns-service"), exports);

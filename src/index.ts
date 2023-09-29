@@ -12,4 +12,4 @@ export * from "./middlewares/error-handlers";
 export * from "./middlewares/require-auth";
 
 // SNS clinet export
-export * from "../src/services/sns-service";
+export * from "./services/sns-service";
