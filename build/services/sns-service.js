@@ -9,9 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.awsSnsClient = void 0;
 const aws_config_1 = require("../config/aws.config");
 const client_sns_1 = require("@aws-sdk/client-sns");
-const awsSnsClient = (() => {
+exports.awsSnsClient = (() => {
     let snsClient;
     /**
      * This function will generate a default AWS SNS client
@@ -91,4 +92,3 @@ const awsSnsClient = (() => {
         publishMessage,
     };
 })();
-exports.default = awsSnsClient;
