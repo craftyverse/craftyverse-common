@@ -1,4 +1,3 @@
-import { awsConfig } from "../config/aws.config";
 import {
   SNSClient,
   CreateTopicCommand,
@@ -7,6 +6,7 @@ import {
   ListTopicsCommandOutput,
   PublishCommand,
   PublishCommandOutput,
+  SNSClientConfig,
 } from "@aws-sdk/client-sns";
 
 export const awsSnsClient = (() => {
@@ -16,9 +16,9 @@ export const awsSnsClient = (() => {
    * This function will generate a default AWS SNS client
    * @returns {SNSClient}
    */
-  const createSnsClient = (): SNSClient => {
+  const createSnsClient = (config: SNSClientConfig): SNSClient => {
     if (!snsClient) {
-      snsClient = new SNSClient(awsConfig);
+      snsClient = new SNSClient(config);
     }
 
     return snsClient;
@@ -26,18 +26,20 @@ export const awsSnsClient = (() => {
 
   /**
    * This will create a sns topic
+   * @param config - The AWS credentials
    * @param topicName - Name of the desired topic name
    * @returns {CreateTopicCommandOutput}
    */
   const createSnsTopic = async (
+    config: SNSClientConfig,
     topicName: string
   ): Promise<CreateTopicCommandOutput | null | string> => {
-    const snsClient = createSnsClient();
+    const snsClient = createSnsClient(config);
     const topicNameParams = { Name: topicName };
     const extractedTopicNames: string[] = [];
 
     const topicList: ListTopicsCommandOutput | undefined =
-      await listAllSnsTopics();
+      await listAllSnsTopics(config);
 
     if (topicList && topicList.Topics) {
       topicList.Topics.forEach((topic) => {
@@ -66,10 +68,10 @@ export const awsSnsClient = (() => {
    * This will list all of tje global sns topics
    * @returns {Promise<ListTopicsCommand | undefined>}
    */
-  const listAllSnsTopics = async (): Promise<
-    ListTopicsCommandOutput | undefined
-  > => {
-    const snsClient = createSnsClient();
+  const listAllSnsTopics = async (
+    config: SNSClientConfig
+  ): Promise<ListTopicsCommandOutput | undefined> => {
+    const snsClient = createSnsClient(config);
     const listTopicsParams = {};
 
     try {
@@ -87,10 +89,11 @@ export const awsSnsClient = (() => {
    * @param topicArn - The topic that the message is going to publish to.
    */
   const publishMessage = async (
+    config: SNSClientConfig,
     message: string,
     topicArn: string
   ): Promise<PublishCommandOutput | undefined> => {
-    const snsClient = createSnsClient();
+    const snsClient = createSnsClient(config);
     const publishMessageParams = {
       Message: message,
       topicArn,
