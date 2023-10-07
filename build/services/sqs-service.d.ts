@@ -15,7 +15,5 @@ export declare const awsSqsClient: {
         attributeNames: string[];
         maxNumberOfMessages?: number;
         waitTimeSeconds?: number;
-        visibilityTimeout?: number;
     }) => Promise<ReceiveMessageCommandOutput>;
-    deleteQueueMessage: (config: SQSClientConfig, queueUrl: string, receiptHandle: string) => Promise<import("@aws-sdk/client-sqs").DeleteMessageCommandOutput>;
 };
