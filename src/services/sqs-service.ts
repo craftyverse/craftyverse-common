@@ -14,9 +14,7 @@ import {
   ReceiveMessageCommand,
   ReceiveMessageCommandInput,
   ReceiveMessageCommandOutput,
-  DeleteMessageCommand,
 } from "@aws-sdk/client-sqs";
-import { NotFoundError } from "../errors/not-found-error";
 
 export const awsSqsClient = (() => {
   let sqsClient: SQSClient;
@@ -96,7 +94,15 @@ export const awsSqsClient = (() => {
     console.log("queues in aws: ", queuesList);
 
     if (!queuesList || !queuesList.QueueUrls) {
-      throw new NotFoundError("no queues defined");
+      const createSqsQueueCommand = new CreateQueueCommand(
+        createSqsQueueParams
+      );
+
+      const createSqsQueueResponse: GetQueueAttributesCommandOutput =
+        await sqsClient.send(createSqsQueueCommand);
+      console.log("This is the response: ", createSqsQueueResponse);
+
+      return createSqsQueueResponse;
     }
 
     const queueNameMatch = queuesList.QueueUrls.find((url) =>
@@ -107,13 +113,7 @@ export const awsSqsClient = (() => {
       return "Queue name already exists";
     }
 
-    const createSqsQueueCommand = new CreateQueueCommand(createSqsQueueParams);
-
-    const createSqsQueueResponse: GetQueueAttributesCommandOutput =
-      await sqsClient.send(createSqsQueueCommand);
-    console.log("This is the response: ", createSqsQueueResponse);
-
-    return createSqsQueueResponse;
+    return "something went wrong";
   };
 
   const receiveQueueMessage = async (
@@ -123,7 +123,6 @@ export const awsSqsClient = (() => {
       attributeNames: string[];
       maxNumberOfMessages?: number;
       waitTimeSeconds?: number;
-      visibilityTimeout?: number;
     }
   ) => {
     const sqsClient = createSqsClient(config);
@@ -133,40 +132,17 @@ export const awsSqsClient = (() => {
       AttributeNames: params.attributeNames,
       MaxNumberOfMessages: params.maxNumberOfMessages,
       WaitTimeSeconds: params.waitTimeSeconds,
-      VisibilityTimeout: params.visibilityTimeout,
     };
 
     const receiveQueueMessageCommand = new ReceiveMessageCommand(
       receiveQueueMessageParams
     );
 
-    const receiveQueueMessageResponse: ReceiveMessageCommandOutput =
-      await sqsClient.send(receiveQueueMessageCommand);
+    const receiveQueueMessageResponse = await sqsClient.send(
+      receiveQueueMessageCommand
+    );
 
     return receiveQueueMessageResponse;
-  };
-
-  const deleteQueueMessage = async (
-    config: SQSClientConfig,
-    queueUrl: string,
-    receiptHandle: string
-  ) => {
-    const sqsClient = createSqsClient(config);
-
-    const deleteQueueMessageParams = {
-      QueueUrl: queueUrl,
-      ReceiptHandle: receiptHandle,
-    };
-
-    const deleteQueueMessageCommand = new DeleteMessageCommand(
-      deleteQueueMessageParams
-    );
-
-    const deleteQueueMessageResponse = await sqsClient.send(
-      deleteQueueMessageCommand
-    );
-
-    return deleteQueueMessageResponse;
   };
 
   return {
@@ -175,6 +151,5 @@ export const awsSqsClient = (() => {
     createSqsQueue,
     getQueueArnByUrl,
     receiveQueueMessage,
-    deleteQueueMessage,
   };
 })();
