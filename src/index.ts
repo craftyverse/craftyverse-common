@@ -13,3 +13,6 @@ export * from "./middlewares/require-auth";
 
 // SNS clinet export
 export * from "./services/sns-service";
+
+// SQS client export
+export * from "./services/sqs-service";

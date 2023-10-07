@@ -27,3 +27,5 @@ __exportStar(require("./middlewares/error-handlers"), exports);
 __exportStar(require("./middlewares/require-auth"), exports);
 // SNS clinet export
 __exportStar(require("./services/sns-service"), exports);
+// SQS client export
+__exportStar(require("./services/sqs-service"), exports);

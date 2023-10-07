@@ -8,3 +8,4 @@ export * from "./middlewares/current-user";
 export * from "./middlewares/error-handlers";
 export * from "./middlewares/require-auth";
 export * from "./services/sns-service";
+export * from "./services/sqs-service";
