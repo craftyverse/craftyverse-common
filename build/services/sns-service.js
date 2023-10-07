@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.awsSnsClient = void 0;
 const client_sns_1 = require("@aws-sdk/client-sns");
+const bad_request_error_1 = require("../errors/bad-request-error");
 exports.awsSnsClient = (() => {
     let snsClient;
     /**
@@ -24,71 +25,108 @@ exports.awsSnsClient = (() => {
         return snsClient;
     };
     /**
-     * This will create a sns topic
-     * @param config - The AWS credentials
-     * @param topicName - Name of the desired topic name
-     * @returns {CreateTopicCommandOutput}
-     */
-    const createSnsTopic = (config, topicName) => __awaiter(void 0, void 0, void 0, function* () {
-        const snsClient = createSnsClient(config);
-        const topicNameParams = { Name: topicName };
-        const extractedTopicNames = [];
-        const topicList = yield listAllSnsTopics(config);
-        if (topicList && topicList.Topics) {
-            topicList.Topics.forEach((topic) => {
-                const topicArn = topic.TopicArn;
-                const topicArray = topicArn.split(":");
-                extractedTopicNames.push(topicArray[topicArray.length - 1]);
-            });
-            if (extractedTopicNames.find((topic) => topic === topicName)) {
-                console.log("Topic name already exists!");
-                return "Topic name already exists!";
-            }
-        }
-        console.log("Full topic names: ", topicList);
-        const createSnsTopicComamnd = new client_sns_1.CreateTopicCommand(topicNameParams);
-        const createSnsTopicResponse = yield snsClient.send(createSnsTopicComamnd);
-        console.log(createSnsTopicResponse);
-        return createSnsTopicResponse;
-    });
-    /**
      * This will list all of tje global sns topics
-     * @returns {Promise<ListTopicsCommand | undefined>}
      */
     const listAllSnsTopics = (config) => __awaiter(void 0, void 0, void 0, function* () {
         const snsClient = createSnsClient(config);
         const listTopicsParams = {};
-        try {
-            const listSnsTopicCommand = new client_sns_1.ListTopicsCommand(listTopicsParams);
-            const listSnsTopicsResponse = yield snsClient.send(listSnsTopicCommand);
-            return listSnsTopicsResponse;
+        const listSnsTopicCommand = new client_sns_1.ListTopicsCommand(listTopicsParams);
+        const listSnsTopicsResponse = yield snsClient.send(listSnsTopicCommand);
+        return listSnsTopicsResponse;
+    });
+    /**
+     * This will create a sns topic
+     * @param config - The AWS credentials
+     * @param topicName - Name of the desired topic name
+     */
+    const createSnsTopic = (config, topicName) => __awaiter(void 0, void 0, void 0, function* () {
+        const snsClient = createSnsClient(config);
+        const topicNameParams = {
+            Name: topicName,
+        };
+        const extractedTopicNames = [];
+        const topicList = yield listAllSnsTopics(config);
+        let fullTopicArn = "";
+        if (topicList && topicList.Topics) {
+            topicList.Topics.forEach((topic) => {
+                const topicArn = topic.TopicArn;
+                fullTopicArn = topicArn;
+                const topicArray = topicArn.split(":");
+                extractedTopicNames.push(topicArray[topicArray.length - 1]);
+            });
         }
-        catch (error) {
-            console.log("An error has occured getting the topics!", error);
+        if (extractedTopicNames.find((topic) => topic === topicName)) {
+            console.log("Topic name already exists!");
+            return {
+                message: "Topic name already exists!",
+                topicArn: fullTopicArn,
+            };
         }
+        console.log("Full topic names: ", topicList);
+        const createSnsTopicComamnd = new client_sns_1.CreateTopicCommand(topicNameParams);
+        const createSnsTopicResponse = yield snsClient.send(createSnsTopicComamnd);
+        const snsTopicResponseString = JSON.stringify(createSnsTopicResponse);
+        console.log(createSnsTopicResponse);
+        return {
+            message: snsTopicResponseString,
+            topicArn: fullTopicArn,
+        };
+    });
+    const getFullTopicArnByTopicName = (config, snsTopicName) => __awaiter(void 0, void 0, void 0, function* () {
+        const topicList = yield listAllSnsTopics(config);
+        const extractedTopicArn = [];
+        console.log("This is the full list of topic ARN: ", topicList);
+        if (topicList && topicList.Topics) {
+            topicList.Topics.forEach((topic) => {
+                const topicArn = topic.TopicArn;
+                extractedTopicArn.push(topicArn);
+            });
+        }
+        console.log(extractedTopicArn);
+        const matchingTopicArn = extractedTopicArn.find((arn) => {
+            return arn.includes(snsTopicName);
+        });
+        return matchingTopicArn;
     });
     /**
      *
      * @param message - Message that is going to be published.
      * @param topicArn - The topic that the message is going to publish to.
      */
-    const publishMessage = (config, message, topicArn) => __awaiter(void 0, void 0, void 0, function* () {
+    const publishSnsMessage = (config, params) => __awaiter(void 0, void 0, void 0, function* () {
         const snsClient = createSnsClient(config);
-        const publishMessageParams = {
-            Message: message,
-            topicArn,
+        const publisSnshMessageParams = {
+            Message: params.message,
+            Subject: params.subject,
+            TopicArn: params.topicArn,
         };
-        const publishSnsMessageCommand = new client_sns_1.PublishCommand(publishMessageParams);
+        const publishSnsMessageCommand = new client_sns_1.PublishCommand(publisSnshMessageParams);
         const publishSnsMessageResponse = yield snsClient.send(publishSnsMessageCommand);
         if (publishSnsMessageResponse.$metadata.httpStatusCode !== 200) {
-            throw new Error("Failed to publish message");
+            throw new bad_request_error_1.BadRequestError("Failed to publish message");
         }
         return publishSnsMessageResponse;
+    });
+    const subscribeToTopic = (config, params) => __awaiter(void 0, void 0, void 0, function* () {
+        const snsClient = createSnsClient(config);
+        const subscribeToSnsTopicParams = {
+            TopicArn: params.topicArn,
+            Protocol: params.protocol,
+            Endpoint: params.endpoint,
+        };
+        const subscribeToSnsTopicCommand = new client_sns_1.SubscribeCommand(subscribeToSnsTopicParams);
+        const subscribeToSnsTopicResponse = yield snsClient.send(subscribeToSnsTopicCommand);
+        if (subscribeToSnsTopicResponse.$metadata.httpStatusCode !== 200) {
+            throw new bad_request_error_1.BadRequestError("Falied to subscribe to topic");
+        }
+        return subscribeToSnsTopicResponse;
     });
     return {
         createSnsClient,
         createSnsTopic,
+        getFullTopicArnByTopicName,
         listAllSnsTopics,
-        publishMessage,
+        publishSnsMessage,
+        subscribeToTopic,
     };
 })();
