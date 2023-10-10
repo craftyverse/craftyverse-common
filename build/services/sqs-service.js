@@ -53,11 +53,9 @@ exports.awsSqsClient = (() => {
             queueNamePrefix: queueName,
             maxResults: 10,
         });
-        console.log("queues in aws: ", queuesList);
         if (!queuesList || !queuesList.QueueUrls) {
             const createSqsQueueCommand = new client_sqs_1.CreateQueueCommand(createSqsQueueParams);
             const createSqsQueueResponse = yield sqsClient.send(createSqsQueueCommand);
-            console.log("This is the response: ", createSqsQueueResponse);
             return createSqsQueueResponse;
         }
         const queueNameMatch = queuesList.QueueUrls.find((url) => url.includes(queueName));

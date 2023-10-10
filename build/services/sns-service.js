@@ -56,17 +56,14 @@ exports.awsSnsClient = (() => {
             });
         }
         if (extractedTopicNames.find((topic) => topic === topicName)) {
-            console.log("Topic name already exists!");
             return {
                 message: "Topic name already exists!",
                 topicArn: fullTopicArn,
             };
         }
-        console.log("Full topic names: ", topicList);
         const createSnsTopicComamnd = new client_sns_1.CreateTopicCommand(topicNameParams);
         const createSnsTopicResponse = yield snsClient.send(createSnsTopicComamnd);
         const snsTopicResponseString = JSON.stringify(createSnsTopicResponse);
-        console.log(createSnsTopicResponse);
         return {
             message: snsTopicResponseString,
             topicArn: fullTopicArn,
@@ -75,14 +72,12 @@ exports.awsSnsClient = (() => {
     const getFullTopicArnByTopicName = (config, snsTopicName) => __awaiter(void 0, void 0, void 0, function* () {
         const topicList = yield listAllSnsTopics(config);
         const extractedTopicArn = [];
-        console.log("This is the full list of topic ARN: ", topicList);
         if (topicList && topicList.Topics) {
             topicList.Topics.forEach((topic) => {
                 const topicArn = topic.TopicArn;
                 extractedTopicArn.push(topicArn);
             });
         }
-        console.log(extractedTopicArn);
         const matchingTopicArn = extractedTopicArn.find((arn) => {
             return arn.includes(snsTopicName);
         });
