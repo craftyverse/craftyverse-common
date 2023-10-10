@@ -1,10 +1,10 @@
-import { SQSClient, SQSClientConfig, ListQueueTagsCommandOutput, CreateQueueCommandOutput, ReceiveMessageCommandOutput } from "@aws-sdk/client-sqs";
+import { SQSClient, SQSClientConfig, ListQueuesCommandOutput, CreateQueueCommandOutput, ReceiveMessageCommandOutput } from "@aws-sdk/client-sqs";
 export declare const awsSqsClient: {
     createSqsClient: (config: SQSClientConfig) => SQSClient;
     listAllSqsQueues: (config: SQSClientConfig, params: {
         queueNamePrefix: string;
         maxResults: number;
-    }) => Promise<ListQueueTagsCommandOutput>;
+    }) => Promise<ListQueuesCommandOutput>;
     createSqsQueue: (config: SQSClientConfig, queueName: string, attributes: {
         delaySeconds: string;
         messageRetentionPeriod: string;

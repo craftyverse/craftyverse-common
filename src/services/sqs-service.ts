@@ -33,7 +33,7 @@ export const awsSqsClient = (() => {
       queueNamePrefix: string;
       maxResults: number;
     }
-  ): Promise<ListQueueTagsCommandOutput> => {
+  ): Promise<ListQueuesCommandOutput> => {
     const sqsClient = createSqsClient(config);
 
     const listAllQueuesParams: ListQueuesCommandInput = {
