@@ -91,8 +91,6 @@ export const awsSqsClient = (() => {
       maxResults: 10,
     });
 
-    console.log("queues in aws: ", queuesList);
-
     if (!queuesList || !queuesList.QueueUrls) {
       const createSqsQueueCommand = new CreateQueueCommand(
         createSqsQueueParams
@@ -100,7 +98,6 @@ export const awsSqsClient = (() => {
 
       const createSqsQueueResponse: GetQueueAttributesCommandOutput =
         await sqsClient.send(createSqsQueueCommand);
-      console.log("This is the response: ", createSqsQueueResponse);
 
       return createSqsQueueResponse;
     }
