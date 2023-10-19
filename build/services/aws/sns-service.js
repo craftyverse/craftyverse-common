@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.awsSnsClient = void 0;
 const client_sns_1 = require("@aws-sdk/client-sns");
-const bad_request_error_1 = require("../errors/bad-request-error");
+const bad_request_error_1 = require("../../errors/bad-request-error");
 exports.awsSnsClient = (() => {
     let snsClient;
     /**

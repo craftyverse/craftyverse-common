@@ -12,7 +12,13 @@ export * from "./middlewares/error-handlers";
 export * from "./middlewares/require-auth";
 
 // SNS clinet export
-export * from "./services/sns-service";
+export * from "./services/aws/sns-service";
 
 // SQS client export
-export * from "./services/sqs-service";
+export * from "./services/aws/sqs-service";
+
+// image service event values
+export * from "./events/craftyverse-image-service/event-variables";
+
+// location service event values
+export * from "./events/craftyverse-location-service/event-variables";

@@ -11,7 +11,7 @@ import {
   SubscribeCommandInput,
   SubscribeCommandOutput,
 } from "@aws-sdk/client-sns";
-import { BadRequestError } from "../errors/bad-request-error";
+import { BadRequestError } from "../../errors/bad-request-error";
 
 export const awsSnsClient = (() => {
   let snsClient: SNSClient;
