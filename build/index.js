@@ -33,3 +33,5 @@ __exportStar(require("./services/aws/sqs-service"), exports);
 __exportStar(require("./events/craftyverse-image-service/event-variables"), exports);
 // location service event values
 __exportStar(require("./events/craftyverse-location-service/event-variables"), exports);
+// product service event values
+__exportStar(require("./events/craftyverse-product-service/event-variables"), exports);

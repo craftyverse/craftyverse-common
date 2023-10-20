@@ -11,3 +11,4 @@ export * from "./services/aws/sns-service";
 export * from "./services/aws/sqs-service";
 export * from "./events/craftyverse-image-service/event-variables";
 export * from "./events/craftyverse-location-service/event-variables";
+export * from "./events/craftyverse-product-service/event-variables";
