@@ -22,3 +22,6 @@ export * from "./events/craftyverse-image-service/event-variables";
 
 // location service event values
 export * from "./events/craftyverse-location-service/event-variables";
+
+// product service event values
+export * from "./events/craftyverse-product-service/event-variables";
