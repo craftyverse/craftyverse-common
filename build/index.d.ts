@@ -9,6 +9,7 @@ export * from "./middlewares/error-handlers";
 export * from "./middlewares/require-auth";
 export * from "./services/aws/sns-service";
 export * from "./services/aws/sqs-service";
+export * from "./services/aws/sts-service";
 export * from "./services/redis/redis-service";
 export * from "./events/craftyverse-image-service/event-variables";
 export * from "./events/craftyverse-location-service/event-variables";

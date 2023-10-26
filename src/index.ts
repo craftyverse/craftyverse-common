@@ -14,6 +14,7 @@ export * from "./middlewares/require-auth";
 // clinet exports
 export * from "./services/aws/sns-service";
 export * from "./services/aws/sqs-service";
+export * from "./services/aws/sts-service";
 export * from "./services/redis/redis-service";
 
 // image service event values
