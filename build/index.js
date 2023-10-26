@@ -25,10 +25,10 @@ __exportStar(require("./errors/request-validation-error"), exports);
 __exportStar(require("./middlewares/current-user"), exports);
 __exportStar(require("./middlewares/error-handlers"), exports);
 __exportStar(require("./middlewares/require-auth"), exports);
-// SNS clinet export
+// clinet exports
 __exportStar(require("./services/aws/sns-service"), exports);
-// SQS client export
 __exportStar(require("./services/aws/sqs-service"), exports);
+__exportStar(require("./services/redis/redis-service"), exports);
 // image service event values
 __exportStar(require("./events/craftyverse-image-service/event-variables"), exports);
 // location service event values

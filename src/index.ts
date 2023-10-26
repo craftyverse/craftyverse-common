@@ -11,11 +11,10 @@ export * from "./middlewares/current-user";
 export * from "./middlewares/error-handlers";
 export * from "./middlewares/require-auth";
 
-// SNS clinet export
+// clinet exports
 export * from "./services/aws/sns-service";
-
-// SQS client export
 export * from "./services/aws/sqs-service";
+export * from "./services/redis/redis-service";
 
 // image service event values
 export * from "./events/craftyverse-image-service/event-variables";
