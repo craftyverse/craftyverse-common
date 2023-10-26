@@ -1,5 +1,5 @@
 import Redis from "ioredis";
-declare const redisClient: {
+export declare const redisClient: {
     getClient: (config?: {
         host: string;
         port: number;
@@ -11,4 +11,3 @@ declare const redisClient: {
     quit: () => Promise<"OK">;
     remove: (key: string) => Promise<number>;
 };
-export default redisClient;

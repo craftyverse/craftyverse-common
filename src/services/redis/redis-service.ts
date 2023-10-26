@@ -1,6 +1,6 @@
 import Redis from "ioredis";
 
-const redisClient = (() => {
+export const redisClient = (() => {
   let client: Redis;
 
   type clientConfig = {
@@ -67,5 +67,3 @@ const redisClient = (() => {
     remove,
   };
 })();
-
-export default redisClient;
