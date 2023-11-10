@@ -52,6 +52,7 @@ exports.awsSqsClient = (() => {
         };
         const createSqsQueueCommand = new client_sqs_1.CreateQueueCommand(createSqsQueueParams);
         const createSqsQueueResponse = yield sqsClient.send(createSqsQueueCommand);
+        console.log(createSqsQueueResponse);
         return createSqsQueueResponse;
     });
     const receiveQueueMessage = (config, queueUrl, params) => __awaiter(void 0, void 0, void 0, function* () {
