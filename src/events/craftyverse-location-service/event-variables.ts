@@ -3,5 +3,5 @@ export enum locationEventVariables {
 }
 
 export enum locationQueueVariables {
-  LOCATION_CREATED_QUEUE = "location_created_queue",
+  LOCATION_CREATED_QUEUE = "location-created-queue",
 }

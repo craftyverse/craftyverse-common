@@ -44,6 +44,7 @@ export const awsSqsClient = (() => {
     const listAllQueuesCommand = new ListQueuesCommand(listAllQueuesParams);
 
     const listAllQueuesResponse = await sqsClient.send(listAllQueuesCommand);
+    console.log(listAllQueuesResponse.$metadata);
 
     return listAllQueuesResponse;
   };

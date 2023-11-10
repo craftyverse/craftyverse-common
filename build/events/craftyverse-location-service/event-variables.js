@@ -7,5 +7,5 @@ var locationEventVariables;
 })(locationEventVariables || (exports.locationEventVariables = locationEventVariables = {}));
 var locationQueueVariables;
 (function (locationQueueVariables) {
-    locationQueueVariables["LOCATION_CREATED_QUEUE"] = "location_created_queue";
+    locationQueueVariables["LOCATION_CREATED_QUEUE"] = "location-created-queue";
 })(locationQueueVariables || (exports.locationQueueVariables = locationQueueVariables = {}));

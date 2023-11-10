@@ -27,6 +27,7 @@ exports.awsSqsClient = (() => {
         };
         const listAllQueuesCommand = new client_sqs_1.ListQueuesCommand(listAllQueuesParams);
         const listAllQueuesResponse = yield sqsClient.send(listAllQueuesCommand);
+        console.log(listAllQueuesResponse.$metadata);
         return listAllQueuesResponse;
     });
     const getQueueArnByUrl = (config, queueUrl) => __awaiter(void 0, void 0, void 0, function* () {
