@@ -50,21 +50,9 @@ exports.awsSqsClient = (() => {
                 ReceiveMessageWaitTimeSeconds: attributes.receiveMessageWaitTimeSeconds,
             },
         };
-        const queuesList = yield listAllSqsQueues(config, {
-            queueNamePrefix: queueName,
-            maxResults: 10,
-        });
-        console.log(queuesList);
-        if (!queuesList || !queuesList.QueueUrls) {
-            const createSqsQueueCommand = new client_sqs_1.CreateQueueCommand(createSqsQueueParams);
-            const createSqsQueueResponse = yield sqsClient.send(createSqsQueueCommand);
-            return createSqsQueueResponse;
-        }
-        const queueNameMatch = queuesList.QueueUrls.find((url) => url.includes(queueName));
-        if (queueNameMatch) {
-            return "Queue name already exists";
-        }
-        return "something went wrong";
+        const createSqsQueueCommand = new client_sqs_1.CreateQueueCommand(createSqsQueueParams);
+        const createSqsQueueResponse = yield sqsClient.send(createSqsQueueCommand);
+        return createSqsQueueResponse;
     });
     const receiveQueueMessage = (config, queueUrl, params) => __awaiter(void 0, void 0, void 0, function* () {
         const sqsClient = createSqsClient(config);

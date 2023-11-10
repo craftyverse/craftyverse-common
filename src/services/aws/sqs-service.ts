@@ -87,33 +87,12 @@ export const awsSqsClient = (() => {
       },
     };
 
-    const queuesList: ListQueuesCommandOutput = await listAllSqsQueues(config, {
-      queueNamePrefix: queueName,
-      maxResults: 10,
-    });
+    const createSqsQueueCommand = new CreateQueueCommand(createSqsQueueParams);
 
-    console.log(queuesList);
+    const createSqsQueueResponse: GetQueueAttributesCommandOutput =
+      await sqsClient.send(createSqsQueueCommand);
 
-    if (!queuesList || !queuesList.QueueUrls) {
-      const createSqsQueueCommand = new CreateQueueCommand(
-        createSqsQueueParams
-      );
-
-      const createSqsQueueResponse: GetQueueAttributesCommandOutput =
-        await sqsClient.send(createSqsQueueCommand);
-
-      return createSqsQueueResponse;
-    }
-
-    const queueNameMatch = queuesList.QueueUrls.find((url) =>
-      url.includes(queueName)
-    );
-
-    if (queueNameMatch) {
-      return "Queue name already exists";
-    }
-
-    return "something went wrong";
+    return createSqsQueueResponse;
   };
 
   const receiveQueueMessage = async (
