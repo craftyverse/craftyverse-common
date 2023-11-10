@@ -50,6 +50,7 @@ exports.awsSqsClient = (() => {
                 ReceiveMessageWaitTimeSeconds: attributes.receiveMessageWaitTimeSeconds,
             },
         };
+        console.log(createSqsQueueParams);
         const createSqsQueueCommand = new client_sqs_1.CreateQueueCommand(createSqsQueueParams);
         const createSqsQueueResponse = yield sqsClient.send(createSqsQueueCommand);
         console.log(createSqsQueueResponse);

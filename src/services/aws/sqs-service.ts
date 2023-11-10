@@ -87,6 +87,8 @@ export const awsSqsClient = (() => {
       },
     };
 
+    console.log(createSqsQueueParams);
+
     const createSqsQueueCommand = new CreateQueueCommand(createSqsQueueParams);
 
     const createSqsQueueResponse: GetQueueAttributesCommandOutput =
