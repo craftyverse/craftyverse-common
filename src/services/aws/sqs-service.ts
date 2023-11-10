@@ -92,6 +92,8 @@ export const awsSqsClient = (() => {
     const createSqsQueueResponse: GetQueueAttributesCommandOutput =
       await sqsClient.send(createSqsQueueCommand);
 
+    console.log(createSqsQueueResponse);
+
     return createSqsQueueResponse;
   };
 
