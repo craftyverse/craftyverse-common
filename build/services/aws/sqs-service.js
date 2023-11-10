@@ -54,6 +54,7 @@ exports.awsSqsClient = (() => {
             queueNamePrefix: queueName,
             maxResults: 10,
         });
+        console.log(queuesList);
         if (!queuesList || !queuesList.QueueUrls) {
             const createSqsQueueCommand = new client_sqs_1.CreateQueueCommand(createSqsQueueParams);
             const createSqsQueueResponse = yield sqsClient.send(createSqsQueueCommand);

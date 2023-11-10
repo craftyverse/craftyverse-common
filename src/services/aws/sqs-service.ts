@@ -92,6 +92,8 @@ export const awsSqsClient = (() => {
       maxResults: 10,
     });
 
+    console.log(queuesList);
+
     if (!queuesList || !queuesList.QueueUrls) {
       const createSqsQueueCommand = new CreateQueueCommand(
         createSqsQueueParams
