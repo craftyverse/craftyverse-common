@@ -4,6 +4,7 @@ export * from "./errors/database-connection-error";
 export * from "./errors/not-authorised-error";
 export * from "./errors/not-found-error";
 export * from "./errors/request-validation-error";
+export * from "./errors/conflict-error";
 export * from "./middlewares/current-user";
 export * from "./middlewares/error-handlers";
 export * from "./middlewares/require-auth";
