@@ -12,6 +12,7 @@ export * from "./middlewares/current-user";
 export * from "./middlewares/error-handlers";
 export * from "./middlewares/require-auth";
 export * from "./middlewares/verify-jwt";
+export * from "./middlewares/verify-roles";
 
 // clinet exports
 export * from "./services/aws/sns-service";
