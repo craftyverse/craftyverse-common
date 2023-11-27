@@ -8,6 +8,7 @@ export * from "./errors/conflict-error";
 export * from "./middlewares/current-user";
 export * from "./middlewares/error-handlers";
 export * from "./middlewares/require-auth";
+export * from "./middlewares/verify-jwt";
 export * from "./services/aws/sns-service";
 export * from "./services/aws/sqs-service";
 export * from "./services/aws/sts-service";

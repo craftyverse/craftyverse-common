@@ -11,6 +11,7 @@ export * from "./errors/conflict-error";
 export * from "./middlewares/current-user";
 export * from "./middlewares/error-handlers";
 export * from "./middlewares/require-auth";
+export * from "./middlewares/verify-jwt";
 
 // clinet exports
 export * from "./services/aws/sns-service";

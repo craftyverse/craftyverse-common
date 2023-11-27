@@ -26,6 +26,7 @@ __exportStar(require("./errors/conflict-error"), exports);
 __exportStar(require("./middlewares/current-user"), exports);
 __exportStar(require("./middlewares/error-handlers"), exports);
 __exportStar(require("./middlewares/require-auth"), exports);
+__exportStar(require("./middlewares/verify-jwt"), exports);
 // clinet exports
 __exportStar(require("./services/aws/sns-service"), exports);
 __exportStar(require("./services/aws/sqs-service"), exports);
