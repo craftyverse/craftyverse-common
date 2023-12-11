@@ -11,7 +11,7 @@ class BadRequestError extends custom_error_1.CustomError {
         Object.setPrototypeOf(this, BadRequestError.prototype);
     }
     serialiseErrors() {
-        return [{ message: this.message, field: 'badRequest' }];
+        return [{ message: this.message, field: "badRequest" }];
     }
 }
 exports.BadRequestError = BadRequestError;

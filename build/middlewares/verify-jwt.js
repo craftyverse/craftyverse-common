@@ -17,6 +17,7 @@ const verifyJWT = (req, res, next) => {
         : authHeader.split(" ")[1];
     jsonwebtoken_1.default.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
         if (err) {
+            console.log(err);
             return res.sendStatus(403);
         }
         console.log(user);
