@@ -20,7 +20,6 @@ const verifyJWT = (req, res, next) => {
             console.log(err);
             return res.sendStatus(403);
         }
-        console.log(user);
         req.userId = user.UserInfo.userId;
         req.userFirstName = user.UserInfo.userFirstName;
         req.userLastName = user.UserInfo.userLastName;

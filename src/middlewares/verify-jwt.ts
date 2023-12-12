@@ -31,7 +31,6 @@ const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
       console.log(err);
       return res.sendStatus(403);
     }
-    console.log(user);
     req.userId = (user as JwtPayload).UserInfo.userId;
     req.userFirstName = (user as JwtPayload).UserInfo.userFirstName;
     req.userLastName = (user as JwtPayload).UserInfo.userLastName;
