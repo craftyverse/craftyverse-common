@@ -1,8 +1,5 @@
 import {
   SNSClient,
-  CreateTopicCommand,
-  CreateTopicCommandOutput,
-  ListTopicsCommand,
   PublishCommand,
   PublishCommandInput,
   PublishCommandOutput,
@@ -26,86 +23,6 @@ export const awsSnsClient = (() => {
     }
 
     return snsClient;
-  };
-
-  /**
-   * This will list all of tje global sns topics
-   */
-  const listAllSnsTopics = async (config: SNSClientConfig) => {
-    const snsClient = createSnsClient(config);
-    const listTopicsParams = {};
-
-    const listSnsTopicCommand = new ListTopicsCommand(listTopicsParams);
-    const listSnsTopicsResponse = await snsClient.send(listSnsTopicCommand);
-    return listSnsTopicsResponse;
-  };
-
-  /**
-   * This will create a sns topic
-   * @param config - The AWS credentials
-   * @param topicName - Name of the desired topic name
-   */
-  const createSnsTopic = async (
-    config: SNSClientConfig,
-    topicName: string
-  ): Promise<{ message: string; topicArn: string }> => {
-    const snsClient = createSnsClient(config);
-    const topicNameParams = {
-      Name: topicName,
-    };
-    const extractedTopicNames: string[] = [];
-
-    const topicList = await listAllSnsTopics(config);
-    let fullTopicArn: string = "";
-
-    if (topicList && topicList.Topics) {
-      topicList.Topics.forEach((topic) => {
-        const topicArn = topic.TopicArn!;
-        fullTopicArn = topicArn;
-        const topicArray = topicArn.split(":");
-        extractedTopicNames.push(topicArray[topicArray.length - 1]);
-      });
-    }
-
-    if (extractedTopicNames.find((topic) => topic === topicName)) {
-      return {
-        message: "Topic name already exists!",
-        topicArn: fullTopicArn,
-      };
-    }
-
-    const createSnsTopicComamnd = new CreateTopicCommand(topicNameParams);
-
-    const createSnsTopicResponse: CreateTopicCommandOutput =
-      await snsClient.send(createSnsTopicComamnd);
-
-    const snsTopicResponseString = JSON.stringify(createSnsTopicResponse);
-
-    return {
-      message: snsTopicResponseString,
-      topicArn: fullTopicArn,
-    };
-  };
-
-  const getFullTopicArnByTopicName = async (
-    config: SNSClientConfig,
-    snsTopicName: string
-  ): Promise<string | undefined> => {
-    const topicList = await listAllSnsTopics(config);
-    const extractedTopicArn: string[] = [];
-
-    if (topicList && topicList.Topics) {
-      topicList.Topics.forEach((topic) => {
-        const topicArn = topic.TopicArn!;
-        extractedTopicArn.push(topicArn);
-      });
-    }
-
-    const matchingTopicArn = extractedTopicArn.find((arn) => {
-      return arn.includes(snsTopicName);
-    });
-
-    return matchingTopicArn;
   };
 
   /**
@@ -171,9 +88,6 @@ export const awsSnsClient = (() => {
 
   return {
     createSnsClient,
-    createSnsTopic,
-    getFullTopicArnByTopicName,
-    listAllSnsTopics,
     publishSnsMessage,
     subscribeToTopic,
   };
